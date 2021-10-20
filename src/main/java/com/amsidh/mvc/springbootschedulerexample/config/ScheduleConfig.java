@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableScheduling
-@EnableSchedulerLock(defaultLockAtMostFor = "15m")
+@EnableSchedulerLock(defaultLockAtMostFor = "1h")
 public class ScheduleConfig {
 
     @Bean
