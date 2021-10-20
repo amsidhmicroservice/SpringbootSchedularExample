@@ -26,14 +26,14 @@ public class ScheduledTask {
     }
 
     //By setting lockAtMostFor we make sure that the lock is released even if the node dies
-    // and by setting lockAtLeastFor we make sure it's not executed more than once in three minutes.
+    // and by setting lockAtLeastFor we make sure it's not executed more than once in one minutes.
     // Please note that lockAtMostFor is just a safety net in case that the node executing the task dies,
     // so set it to a time that is significantly larger than maximum estimated execution time.
     // If the task takes longer than lockAtMostFor, it may be executed again and the results will be unpredictable (more processes will hold the lock).
-    @Scheduled(cron = "0 */3 * * * *")
-    @SchedulerLock(name = "ScheduledTask.shortRunningTask", lockAtMostFor = "2m", lockAtLeastFor = "2m")
+    @Scheduled(cron = "0 */1 * * * *")
+    @SchedulerLock(name = "ScheduledTask.shortRunningTask", lockAtMostFor = "59s", lockAtLeastFor = "59s")
     public void shortRunningTask() {
-        log.info("cron 0 */3 * * * * and  lockAtMostFor 2m and lockAtLeastFor 2m " + dateFormat.format(new Date()) + " and instance name is :" + instanceInformationService.retrieveInstanceInfo());
+        log.info("cron 0 */1 * * * * and  lockAtMostFor 59s and lockAtLeastFor 59s " + dateFormat.format(new Date()) + " and instance name is :" + instanceInformationService.retrieveInstanceInfo());
     }
 
 }

@@ -1,14 +1,11 @@
 package com.amsidh.mvc.springbootschedulerexample.config;
 
-import net.javacrumbs.shedlock.core.LockProvider;
-import net.javacrumbs.shedlock.provider.jdbctemplate.JdbcTemplateLockProvider;
+import com.hazelcast.core.HazelcastInstance;
+import net.javacrumbs.shedlock.provider.hazelcast.HazelcastLockProvider;
 import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableScheduling
@@ -16,12 +13,10 @@ import javax.sql.DataSource;
 public class ScheduleConfig {
 
     @Bean
-    public LockProvider lockProvider(DataSource dataSource) {
-        return new JdbcTemplateLockProvider(
-                JdbcTemplateLockProvider.Configuration.builder()
-                        .withJdbcTemplate(new JdbcTemplate(dataSource))
-                        .usingDbTime()
-                        .build()
-        );
+    public HazelcastLockProvider lockProvider(HazelcastInstance hazelcastInstance) {
+        return new HazelcastLockProvider(hazelcastInstance);
     }
+
+
+
 }
