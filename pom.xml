@@ -16,7 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <shedlock.version>4.28.0</shedlock.version>
-        <postgresql.version>42.2.24</postgresql.version>
+        <postgresql.version>42.3.9</postgresql.version>
     </properties>
     <dependencies>
         <dependency>
